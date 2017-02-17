@@ -25,16 +25,29 @@ for model_num in range(len(tags_list)):
     # TODO: build a model 
     x = df_training_data.drop(df_training_data.columns[model_num], axis=1)
     y = df_training_data.iloc[:, model_num]
-    model_list[model_num] = logreg = linear_model.LogisticRegression.fit(x,y) # logistic regression y~x
+    model_list[model_num] = linear_model.LogisticRegression.fit(x,y) # logistic regression y~x
 
 # TODO: fetch a set of tags input as a list of string
-tags = ['a','b']
+input_tags = ['a','b']
+input_vector = pd.Series(tags_list).isin(input_tags).astype(int)
+
+
+for i in range(len(xxx)):
+    print(xxx[1:i] + xxx[i+1:])
 
 # TODO: feed into recommender
 # rec_tags = recommender(input_tags)
+scores_list = []
+for model_num in range(len(tags_list)):
+    x = input_vector[:model_num] + input_vector[model_num + 1:]
+    scores_list[model_num] = predict_log_proba(x) # model prediction
+
+# bind score and tags_list, 
+# TODO: then remove the ones in input and rank
+df_ranking = pd.DataFrame.from_items([('tags', tags_list), ('score', scores_list)])
 rec_tags = ['ccc', 'ddd']
 
 
-# print tags
+# print first few tags
 print('People who tagged ' + ', '.join(tags) + ' also tagged: ')
 print('\n'.join(rec_tags))
