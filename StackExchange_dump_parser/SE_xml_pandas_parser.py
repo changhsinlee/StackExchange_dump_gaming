@@ -20,5 +20,6 @@ df_tags = pd.DataFrame.from_dict(tags_doc['tags']['row'])
 df_tags = df_tags.rename(columns = lambda x : str(x)[1:]) # remove @ 
 
 df_posts = pd.DataFrame.from_dict(posts_doc['posts']['row'][:5])
+print(df_tags[:5])
 print(df_posts)
 
